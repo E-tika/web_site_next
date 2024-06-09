@@ -5,8 +5,12 @@ const Header = () => {
     return (
         <header className="bg-blue-600 text-white flex items-center justify-between p-4">
             <div className="flex items-center">
-                <Image src="/images/tmp_logo.png" alt="Icon" width={40} height={40} className="mr-2" />
-                <span className="text-lg font-bold">経済学部同好会</span>
+                <Link href="/">
+                    <div className="flex items-center">
+                        <Image src="/images/tmp_logo.png" alt="Icon" width={40} height={40} className="mr-2" />
+                        <span className="text-lg font-bold hover:text-blue-300">経済学部同好会</span>
+                    </div>
+                </Link>
             </div>
             <nav>
                 <ul className="flex space-x-4">
