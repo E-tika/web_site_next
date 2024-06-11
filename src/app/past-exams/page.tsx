@@ -1,4 +1,4 @@
-export default function HomePage() {
+export function HomePage() {
   return (
     <div className="p-4">
       <h2>Welcome to the Home Page</h2>
@@ -8,7 +8,7 @@ export default function HomePage() {
 }
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { auth } from '../../../libs/firebaseConfig';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
