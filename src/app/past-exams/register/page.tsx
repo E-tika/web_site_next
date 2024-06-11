@@ -1,7 +1,9 @@
+'use client';
+
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../libs/firebaseConfig';
-import { useRouter } from 'next/router';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth } from '../../../../libs/firebaseConfig';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
     const [email, setEmail] = useState('');
@@ -12,8 +14,10 @@ const RegisterPage = () => {
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            // 登録成功後にユーザー情報に学生番号を追加するなどの処理をここで行います
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            await sendEmailVerification(user);
+            alert('確認メールを送信しました。メールを確認してアカウントを有効化してください。');
             router.push('/past-exams');
         } catch (error) {
             console.error('Error registering:', error);

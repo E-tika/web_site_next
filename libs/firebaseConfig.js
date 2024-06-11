@@ -1,10 +1,9 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import { getFirestore, Firestore } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 import {
-    getAuth,
-    Auth
+    getAuth
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -18,9 +17,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app)
-const auth = getAuth(app)
+var app = initializeApp(firebaseConfig);
+var firestore = getFirestore(app)
+var auth = getAuth(app)
 const analytics = getAnalytics(app);
 
 //サーバーサイドでレンダリングするときのエラーを避ける
