@@ -10,7 +10,7 @@ export function HomePage() {
 }
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../libs/firebaseConfig';
+import { auth } from '../../libs/firebaseConfig';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 

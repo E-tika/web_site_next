@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../../../libs/firebaseConfig'; // Correct import path
+import { auth } from '../../../libs/firebaseConfig'; // Correct import path
 import { useRouter } from 'next/navigation';
 
 const ResetPasswordPage = () => {

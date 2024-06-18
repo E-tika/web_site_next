@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 const Header = () => {
     return (
-        <header className="bg-blue-600 text-white flex items-center justify-between p-4">
+        <header className="bg-blue-500 text-white flex items-center justify-between p-4">
             <div className="flex items-center">
                 <Link href="/">
                     <div className="flex items-center">
-                        <Image src="/images/tmp_logo.png" alt="Icon" width={40} height={40} className="mr-2" />
+                        <Image src="/images/banana.png" alt="Icon" width={40} height={40} className="mr-2" />
                         <span className="text-lg font-bold hover:text-blue-300">経済学部同好会</span>
                     </div>
                 </Link>

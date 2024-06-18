@@ -10,7 +10,15 @@
   },
   "dependencies": {
     "@types/firebase": "^3.2.1",
+    "axios": "^1.7.2",
+    "child_process": "^1.0.2",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "firebase": "^10.12.2",
+    "firebase-admin": "^12.1.1",
+    "fs": "^0.0.1-security",
+    "googleapis": "^140.0.0",
+    "net": "^1.0.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
