@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollable-block {
+    max-height: 350px;
+    overflow-y: scroll;
+}
