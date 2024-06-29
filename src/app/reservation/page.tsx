@@ -71,7 +71,6 @@ const Home = () => {
         <div className="w-24 border p-2">{timeSlot}</div>
         {rooms.map((room) => {
           const roomReservations = getRoomReservations(room, date);
-          // if (roomReservations.length > 0) { console.log('hoge', timeSlot, timeToMinutes(timeSlot) >= timeToMinutes(roomReservations[0].startTime) && timeToMinutes(timeSlot) < timeToMinutes(roomReservations[0].endTime)) }
           const isReserved = roomReservations.some(
             res => { return timeToMinutes(timeSlot) >= timeToMinutes(res.startTime) && timeToMinutes(timeSlot) < timeToMinutes(res.endTime) }
           );
