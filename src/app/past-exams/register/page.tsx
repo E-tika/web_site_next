@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth, firestore } from '../../../libs/firebaseConfig';
 import { useRouter } from 'next/navigation';
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, query, where, getDocs } from 'firebase/firestore';
 
 const RegisterPage = () => {
     const [username, setUsername] = useState('');
@@ -16,11 +16,26 @@ const RegisterPage = () => {
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('')
-        try {
-            const docRef = doc(firestore, 'students', studentId);
-            const docSnap = await getDoc(docRef);
 
-            if (!docSnap.exists()) {
+        try {
+            const studentsRef = collection(firestore, 'students');
+            const querySnapshot = await getDocs(studentsRef);
+
+            let studentExists = false;
+
+            for (const doc of querySnapshot.docs) {
+                const enrollmentYear = doc.id;
+                const studentNumbersRef = collection(firestore, 'students', enrollmentYear, 'student_numbers');
+                const studentQuery = query(studentNumbersRef, where('__name__', '==', studentId));
+                const studentSnapshot = await getDocs(studentQuery);
+
+                if (!studentSnapshot.empty) {
+                    studentExists = true;
+                    break;
+                }
+            }
+
+            if (!studentExists) {
                 setError('無効な学生番号です。');
                 return;
             }
@@ -53,7 +68,7 @@ const RegisterPage = () => {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="border p-2 w-3/4"
+                            className="border p-2 w-2/5"
                             required
                         />
                         <span className="inline-block p-2 text-gray-500 text-lg">@st.kyoto-u.ac.jp</span>
@@ -65,17 +80,17 @@ const RegisterPage = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="border p-2 w-full"
+                        className="border p-2 w-2/5"
                         required
                     />
                 </div>
                 <div className="mb-2">
-                    <label className="block">学生番号:</label>
+                    <label className="block">学生番号(ハイフン抜き10桁):</label>
                     <input
                         type="text"
                         value={studentId}
                         onChange={(e) => setStudentId(e.target.value)}
-                        className="border p-2 w-full"
+                        className="border p-2 w-2/5"
                         required
                     />
                 </div>

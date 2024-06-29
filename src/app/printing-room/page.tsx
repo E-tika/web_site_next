@@ -1,8 +1,172 @@
-export default function HomePage() {
+'use client';
+
+import { useState } from 'react';
+import Modal from '../../components/Modal';
+
+const HomePage = () => {
+  const [showRisoUsage, setShowRisoUsage] = useState(false);
+  const [showRisoForm, setShowRisoForm] = useState(false);
+  const [showPrinterUsage, setShowPrinterUsage] = useState(false);
+
   return (
-    <div className="p-4">
-      <h2>Welcome to the Home Page</h2>
-      <p>This is the main content of the home page.</p>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">印刷機のご利用について</h1>
+      <p className="mb-4">
+        経済学部同好会では以下の2種類の印刷機の管理・運用を行っております。
+        以下の説明をよく読んだ上で利用し、輪転機ご利用後は報告フォームへの記入をお願いいたします。
+      </p>
+      <p className="mb-4">
+        輪転機・モノクロコピー機は印刷機室に設置しております。
+      </p>
+
+      <h2 className="text-2xl font-bold mt-6 mb-4">輪転機</h2>
+      <p className="mb-4">
+        輪転機は安価で大量の印刷が可能なコピー機です。白黒印刷のみ対応です。
+        版（マスター）を作成し、その1枚のマスターを元に同じ書類を大量に印刷する機能を持ち、ビラやパンフレットの印刷に適しています。
+      </p>
+      <p className="mb-4">
+        利用後は輪転機ご利用フォームに使用マスター数と印刷枚数をご記入ください。
+      </p>
+      <p className="mb-4">
+        <strong>インク代:</strong> 0.5円/枚<br />
+        <strong>マスター代:</strong> 50円/枚
+      </p>
+      <div className="flex space-x-4">
+        <button
+          onClick={() => setShowRisoUsage(true)}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          輪転機の使い方
+        </button>
+        <button
+          onClick={() => setShowRisoForm(true)}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          輪転機使用フォーム
+        </button>
+      </div>
+
+      <h2 className="text-2xl font-bold mt-6 mb-4">白黒コピー機</h2>
+      <p className="mb-4">
+        経済学部同好会は経済学部総務課より委託を受け、コピー機の運用を行っております。
+        経済学部の1～3回生は一年間に50枚の印刷が可能です。
+      </p>
+      <p className="mb-4">
+        ご利用には学生証が必要です。
+      </p>
+      <p className="mb-4">
+        <strong>料金:</strong> 0円/枚<br />
+        <strong>印刷可能枚数:</strong> 50枚/年（経済学部生）
+      </p>
+      <button
+        onClick={() => setShowPrinterUsage(true)}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        印刷機の使い方
+      </button>
+
+      {showRisoUsage && (
+        <Modal onClose={() => setShowRisoUsage(false)}>
+          <h2 className="text-xl font-bold mb-4">輪転機の使い方</h2>
+          <div className="max-h-full space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-semibold">輪転機ご利用方法</h3>
+              <p>輪転機は皆様のご協⼒で成り⽴っております。</p>
+              <p>
+                輪転機利⽤の際は「使用枚数報告フォーム」に利⽤⽇・団体名・利⽤者⽒名・連絡先・使⽤前後の印刷枚数・使⽤前後のマスター枚数をご記⼊ください。後⽇、同好会常任委員より使⽤料⾦の請求をさせていただきます。
+              </p>
+              <p>
+                ⽤紙は持ち込み制となっております。ご⾃⾝でお持ちください。
+                マスター切れ・インク切れの際は向かいの経済学部同好会事務室までお越しください。マスター・インクの交換をされていただきます。
+              </p>
+              <p>
+                万が⼀、事務室に経済学部同好会常任委員が不在の際はお⼿数ですが、下記「お問い合わせ」よりご連絡いただけますと幸いです。
+              </p>
+              <p>
+                輪転機は経済学部同好会の管理ですが、モノクロコピー機は経済学部総務掛の管理となります。インク切れ、⽤紙切れの際は総務掛までご報告ください。
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold">使用方法</h3>
+              <ol className="list-decimal list-inside space-y-2">
+                <li>
+                  上部の使用枚数報告フォームに「氏名」「連絡先」を必ず記入してください。輪転機の前面パネルを開け「トータルカウンター」の数字を「使用前枚数」、「マスターカウンター」の数字を「使用前マスター」の欄に記入します。
+                </li>
+                <li>
+                  用紙を左側にセット（プッシャーの緑ボタンで用紙トレイが下がります）した後、原稿を原稿ガラスに入れ、「製版」を行います。製版終了時に試し刷りが1枚されます。これで製版ができているかを確認します。
+                </li>
+                <li>
+                  製版後、自動的に「印刷」にモードが切り替わるので、希望の枚数を印刷します。原稿の印刷は次に「製版」を行うまで何度でも可能です。※輪転機では両面印刷はできません。片面ずつ行ってください。
+                </li>
+                <li>
+                  次の原稿を入れ、「製版」→「印刷」の手順を行います。
+                </li>
+                <li>
+                  使用後は再び、前面パネルを開き、「トータルカウンター」、「マスターカウンター」の数字を印刷枚数申告フォームの「使用後枚数」「使用後マスター」に記入します。
+                </li>
+              </ol>
+              <p>※料金は後払いです。毎年6月と12月の2回に利用履歴をもとに集計し、同好会より請求いたします。必ず連絡のつく連絡先を記入ください。料金については別紙を参入してください。</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold">よくあるトラブル</h3>
+              <div className="space-y-2">
+                <p>
+                  <strong>印刷が薄い</strong><br />
+                  「製版」直後の印刷は薄くかすれて出るケースがあります。これは多くの場合、インクが「版 マスター」に染み込まないためです。何度か繰り返し「試し刷り」や「印刷」を行ってください。
+                  これが原因の場合，再び「製版」しても印刷は濃くなりません。（マスターが１カウント余計に使われることになります）
+                  何度か印刷をしても印字が改善されない場合、以下の原因が考えられます。
+                </p>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>印刷の「濃度」設定が薄い</li>
+                  <li>製版の 「読み取り濃度」設定が薄い</li>
+                </ol>
+                <p>濃度は5段階で設定可能ですので調節して再度お試しください。</p>
+                <p>
+                  <strong>紙が複数取り込まれる</strong><br />
+                  長時間の印刷でローラーが温まると紙が複数取り込まれることがあります。このときは少し印刷を中断してください。
+                  連続稼働していない時に数枚の用紙がまとめて取り込まれることが頻発することがあります。その際は給紙トレイの上にある「給紙圧」レバーが「厚紙」になっていないか確認ください。
+                </p>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold">個人情報の取り扱いに関して</h3>
+              <p>
+                一度製版された文書は、再度、製版されるまで電源を一度落としても何度も印刷することができます。個人情報や機密を印刷した後は、別の文書で製版するか、原稿なしでの再製版をお願いします。再製版時、前のマスターは廃版BOXへと移ります。
+              </p>
+              <p>
+                廃棄する際は、給紙トレイ上部のレバーを引いて中のマスターを処分してください。なお、個人情報等が記載されていない文書の場合は上記の手順をとっていただく必要はありません．
+              </p>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+
+      {showRisoForm && (
+        <Modal onClose={() => setShowRisoForm(false)}>
+          <h2 className="text-xl font-bold mb-4">輪転機使用フォーム</h2>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1FNyLTwbrgrv6DwMLbutiXmyyhOK88EHShgVheZy6o2A3ZQ/viewform?embedded=true" width="640" height="2200">読み込んでいます…</iframe>
+        </Modal>
+      )}
+
+      {showPrinterUsage && (
+        <Modal onClose={() => setShowPrinterUsage(false)}>
+          <h2 className="text-xl font-bold mb-4">印刷機の使い方</h2>
+          <p>白黒コピー機概要</p>
+          <p>
+            白黒コピー機は経済学部総務掛の所管となっており、経済学部同好会は経済学部総務掛より委託を受け、コピー機の運用を行っております。インク切れ、⽤紙切れの際は総務掛までご報告ください。1～3回生の経済学部生は一年間に50枚の印刷が可能です。学生証を持参のうえお越しください。
+          </p>
+          <p>A4,A3,B4の3サイズの印刷が可能です。</p>
+          <p>コピー機使用方法</p>
+          <ol>
+            <li>コピーカードを読み取り機に挿入してください。</li>
+            <li>原稿を上の原稿トレイまたは原稿ガラスに入れ、コピーしてください。USBから出力してPDF等を印刷することはできません。</li>
+            <li>残回数が0になったカードは下にある回収BOXに入れてください。</li>
+          </ol>
+        </Modal>
+      )}
     </div>
-  )
-}
+  );
+};
+
+export default HomePage;

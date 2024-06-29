@@ -10,7 +10,7 @@ const ContactPage = () => {
       <p className="mb-4">
         また、Googleフォームからのお問い合わせも受け付けています。以下のフォームからお願いします。
       </p>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLQsA-Cf1ihAa0MCDfurhkrpSyIWCvKcI7_arU16guu7Ha-g/viewform?embedded=true" width="800" height="1000" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLQsA-Cf1ihAa0MCDfurhkrpSyIWCvKcI7_arU16guu7Ha-g/viewform?embedded=true" width="800" height="1000">読み込んでいます…</iframe>
     </div>
   );
 }

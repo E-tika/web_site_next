@@ -59,7 +59,7 @@ const Home = () => {
 
   const renderTimeSlots = () => {
     const timeSlots = [];
-    for (let i = 5; i < 22; i++) {
+    for (let i = 5; i < 21; i++) {
       for (let j = 0; j < 60; j += 15) {
         timeSlots.push(`${String(i).padStart(2, '0')}:${String(j).padStart(2, '0')}`);
       }
@@ -94,11 +94,11 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className='flex justify-center'>
-        <div className="w-1/4 mt-[100px] ">
+      <div className='flex flex-col sm:flex-row justify-center'>
+        <div className="flex-shrink-0 w-1/4 mt-[100px] min-w-[260px]">
           <Calendar value={date} onChange={handleDateChange} locale="ja-JP" />
         </div>
-        <div className="w-3/4 pl-4">
+        <div className="flex-grow pl-4">
           <h1 className="text-2xl font-bold mb-4">購読室の予約状況</h1>
           <p className="mb-4">選択した日付: {date.toLocaleDateString('ja-JP')}</p>
           <div className="grid grid-cols-1 gap-4">

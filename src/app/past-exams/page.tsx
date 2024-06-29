@@ -21,9 +21,10 @@ const PastExamsPage = () => {
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
+    const fullEmail = `${email}@st.kyoto-u.ac.jp`
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, fullEmail, password);
       const user = userCredential.user;
       if (user.emailVerified) {
         router.push('/past-exams/download');
@@ -43,13 +44,17 @@ const PastExamsPage = () => {
       <form onSubmit={handleLogin} className="mb-4">
         <div className="mb-2">
           <label className="block">メールアドレス:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border p-2 w-full"
-            required
-          />
+          <div className='flex'>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border p-2 w-2/5"
+              required
+            />
+            <span className="inline-block p-2 text-gray-500 text-lg">@st.kyoto-u.ac.jp</span>
+          </div>
+
         </div>
         <div className="mb-2">
           <label className="block">パスワード:</label>
@@ -57,7 +62,7 @@ const PastExamsPage = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border p-2 w-full"
+            className="border p-2 w-2/5"
             required
           />
         </div>

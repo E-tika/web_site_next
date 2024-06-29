@@ -1,6 +1,7 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAuth, Auth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -16,14 +17,19 @@ let app: FirebaseApp;
 let auth: Auth;
 let firestore: Firestore;
 
-// Initialize Firebase only if no Firebase app is already initialized
-if (!getApps().length) {
-    app = initializeApp(firebaseConfig);
-} else {
-    app = getApps()[0];
-}
+app = initializeApp(firebaseConfig)
+
+// // Initialize Firebase only if no Firebase app is already initialized
+// if (!getApps().length) {
+//     app = initializeApp(firebaseConfig);
+// } else {
+//     app = getApps()[0];
+// }
+
 
 auth = getAuth(app);
 firestore = getFirestore(app);
 
-export { auth, firestore };
+const provider = new GoogleAuthProvider()
+
+export { auth, firestore, provider };
