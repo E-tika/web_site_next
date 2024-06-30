@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { auth } from '../../../libs/firebaseConfig'; // Correct import path
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 const DownloadPage = () => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<User | null>(null);
     const router = useRouter();
 
     useEffect(() => {

@@ -1,8 +1,13 @@
-import '../app/globals.css'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import React, { ReactNode } from 'react';
+import '../app/globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
@@ -13,5 +18,7 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
-  )
-}
+  );
+};
+
+export default RootLayout;
