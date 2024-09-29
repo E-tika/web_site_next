@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 const Header = () => {
@@ -10,12 +9,12 @@ const Header = () => {
     return (
         <header className="bg-blue-500 text-white flex items-center justify-between p-4">
             <div className="flex items-center">
-                <Link href="/">
-                    <div className="flex items-center">
-                        <Image src="/images/banana.png" alt="Icon" width={40} height={40} className="mr-2" />
+                {/* <Link href="/" passHref>
+                    <a className="flex items-center">
+                        <img src="/images/banana.png" alt="Icon" width={40} height={40} className="mr-2" />
                         <span className="text-lg font-bold hover:text-blue-300">経済学部同好会</span>
-                    </div>
-                </Link>
+                    </a>
+                </Link> */}
             </div>
             <nav className="hidden sm:flex">
                 <ul className="flex space-x-4">

@@ -31,6 +31,13 @@ const PastExamsPage = () => {
 
   return (
     <div className="p-4">
+      <div className='mb-4'>
+        <h2 className="text-2xl mb-4">過去試験の閲覧について</h2>
+        <p>
+          このページは試験過去問閲覧用のログインページです。<br />
+          会員登録後にログインすることで試験過去問を閲覧していただけます。
+        </p>
+      </div>
       <h2 className="text-2xl mb-4">ログイン</h2>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleLogin} className="mb-4">

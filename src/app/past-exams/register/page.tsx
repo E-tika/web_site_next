@@ -15,14 +15,14 @@ const RegisterPage = () => {
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('')
+        setError('');
 
         try {
             const studentsRef = collection(firestore, 'students');
-            const querySnapshot = await getDocs(studentsRef);
-
             let studentExists = false;
 
+            // 学生番号が存在するか確認するために、全ての学生番号を検索します
+            const querySnapshot = await getDocs(studentsRef);
             for (const doc of querySnapshot.docs) {
                 const enrollmentYear = doc.id;
                 const studentNumbersRef = collection(firestore, 'students', enrollmentYear, 'student_numbers');
@@ -40,7 +40,7 @@ const RegisterPage = () => {
                 return;
             }
 
-            const fullEmail = `${username}@st.kyoto-u.ac.jp`
+            const fullEmail = `${username}@st.kyoto-u.ac.jp`;
             const userCredential = await createUserWithEmailAndPassword(auth, fullEmail, password);
             const user = userCredential.user;
             await sendEmailVerification(user);
@@ -49,12 +49,13 @@ const RegisterPage = () => {
         } catch (error: any) {
             console.error('Error registering:', error);
             if (error.message) {
-                setError(error.message)
+                setError(error.message);
             } else {
                 setError('登録に失敗しました。もう一度お試しください。');
             }
         }
     };
+
 
     return (
         <div className="p-4">
@@ -96,6 +97,11 @@ const RegisterPage = () => {
                 </div>
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">登録</button>
             </form>
+            <div>
+                <p>
+                    ※会員登録について不明点がある場合は同好会までお問い合わせください。
+                </p>
+            </div>
         </div>
     );
 };

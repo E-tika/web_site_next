@@ -7,7 +7,14 @@ import { useRouter } from 'next/navigation';
 
 const DownloadPage = () => {
     const [user, setUser] = useState<User | null>(null);
+    const [fileUrls, setFileUrls] = useState<{ year: number; url: string; text: string }[]>([]);
     const router = useRouter();
+
+    const files = [
+        { year: 2023, url: 'https://drive.google.com/uc?export=download&id=1XGtaxtj3Q8i-OYeF7aW_W2PWXJcWqQ-1', text: '2023年過去問のダウンロード' },
+        { year: 2022, url: 'https://drive.google.com/uc?export=download&id=1FY3Gd3A8DkrERaOT4rF7kqq31jOzQY3n', text: '2022年過去問のダウンロード' },
+        // 必要に応じて他のファイルを追加
+    ];
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -15,6 +22,7 @@ const DownloadPage = () => {
                 router.push('/past-exams');
             } else {
                 setUser(currentUser);
+                setFileUrls(files);
             }
         });
 
@@ -28,10 +36,16 @@ const DownloadPage = () => {
     return (
         <div className="p-4">
             <h2 className="text-2xl mb-4">過去試験のダウンロード</h2>
+            <p className='text-red-600 text-2xl font-extrabold mb-4'>
+                過去問のコピー・再配布は絶対にしないでください！<br />
+                問題が発生した場合、試験過去問の公開は取りやめとなります。
+            </p>
             <ul>
-                <li><a href="/files/exam1.pdf" className="text-blue-500 hover:underline" download>試験1のダウンロード</a></li>
-                <li><a href="/files/exam2.pdf" className="text-blue-500 hover:underline" download>試験2のダウンロード</a></li>
-                <li><a href="/files/exam3.pdf" className="text-blue-500 hover:underline" download>試験3のダウンロード</a></li>
+                {fileUrls.map((file, index) => (
+                    <li key={index}>
+                        <a href={file.url} className="text-blue-500 hover:underline" download>{file.text}</a>
+                    </li>
+                ))}
             </ul>
         </div>
     );

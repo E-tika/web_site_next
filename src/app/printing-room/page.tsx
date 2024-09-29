@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">印刷機のご利用について</h1>
+      <h1 className="text-2xl mb-4 font-bold">印刷機のご利用について</h1>
       <p className="mb-4">
         経済学部同好会では以下の2種類の印刷機の管理・運用を行っております。
         以下の説明をよく読んだ上で利用し、輪転機ご利用後は報告フォームへの記入をお願いいたします。
@@ -145,8 +145,19 @@ const HomePage = () => {
       {showRisoForm && (
         <Modal onClose={() => setShowRisoForm(false)}>
           <h2 className="text-xl font-bold mb-4">輪転機使用フォーム</h2>
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1FNyLTwbrgrv6DwMLbutiXmyyhOK88EHShgVheZy6o2A3ZQ/viewform?embedded=true" width="640" height="2200">読み込んでいます…</iframe>
+          <div className="w-full h-[500px] sm:h-[1000px] lg:h-[1500px]">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSd1FNyLTwbrgrv6DwMLbutiXmyyhOK88EHShgVheZy6o2A3ZQ/viewform?embedded=true"
+              className="w-full h-full"
+              style={{ border: 'none' }}
+              title="輪転機使用フォーム"
+            >
+              読み込んでいます…
+            </iframe>
+          </div>
         </Modal>
+
+
       )}
 
       {showPrinterUsage && (
