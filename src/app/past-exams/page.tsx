@@ -69,6 +69,7 @@ const PastExamsPage = () => {
       </form>
       <p>アカウントをお持ちでないですか？ <Link href="/past-exams/register" className="text-blue-500">登録はこちら</Link></p>
       <p>パスワードをお忘れですか？ <Link href="/past-exams/reset-password" className="text-blue-500">パスワードをリセットするにはこちら</Link></p>
+      <p>他学部の方はこちらから登録いただくことで利用いただけます。 <Link href="/past-exams/other-faculty" className="text-blue-500">他学部の方はこちら</Link></p>
     </div>
   );
 };

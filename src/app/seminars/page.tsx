@@ -25,7 +25,6 @@ const SeminarPage = () => {
 
         </p>
         <h2 className="text-xl mt-4 mb-2 font-semibold">過去のゼミ紹介資料</h2>
-        <p>説明</p>
         <ul className="list-disc pl-5">
           <li><a href="https://drive.google.com/drive/folders/1OczcERPoYgDwUdvdrA7EhCN0hBScclFX?usp=sharing" className="text-blue-500 underline" target='_blank' rel='noopener noreferrer'>2024年度ゼミ紹介 (2023年10月20日開催)</a></li>
           <li>2回生演習が廃止のため2023年度ゼミ紹介は実施せず</li>

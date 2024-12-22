@@ -61,6 +61,15 @@ const RegisterPage = () => {
         <div className="p-4">
             <h2 className="text-2xl mb-4">アカウント登録</h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
+
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
+                <p className="font-bold">注意事項:</p>
+                <ul className="list-disc list-inside">
+                    <li>アカウントの登録作業後にメールが届くので、アカウントを有効化してください。</li>
+                    <li>過去問の(個人的なものを含む)再配布行為は絶対におやめください</li>
+                </ul>
+            </div>
+
             <form onSubmit={handleRegister} className="mb-4">
                 <div className="mb-2">
                     <label className="block">メールアドレス(大学メール):</label>

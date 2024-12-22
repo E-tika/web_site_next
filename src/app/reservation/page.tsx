@@ -93,11 +93,15 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className='mb-8'>
-        <p>
-          購読室の予約は必ず予約状況を確認し、重複して予約されないようにお願いします。<br />
-          重複予約については、先の予約を優先させていただきます。
-        </p>
+      <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
+        <p className="font-bold">注意事項:</p>
+        <ul className="list-disc list-inside">
+          <li>
+            購読室の予約は必ず予約状況を確認し、重複して予約されないようにお願いします。<br />
+            <span className='ml-4'>重複予約については、先の予約を優先させていただきます</span>
+          </li>
+          <li>土・日・祝は購読室はご利用いただけません。予約なさらないようご注意ください。</li>
+        </ul>
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4">
         <div className="flex-shrink-0 mt-0 sm:mt-4 min-w-[260px]">
