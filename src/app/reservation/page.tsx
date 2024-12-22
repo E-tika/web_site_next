@@ -61,7 +61,7 @@ const Home = () => {
     const timeSlots = [];
     for (let i = 5; i < 21; i++) {
       for (let j = 0; j < 60; j += 15) {
-        timeSlots.push(`${String(i).padStart(2, '0')}:${String(j).padStart(2, '0')}`);
+        timeSlots.push(`${String(i).padStart(2, '0')}:${String(j).padStart(2, '0')}~`);
       }
     }
     const rooms = ['購読室 1', '購読室 2', '購読室 3'];
@@ -106,7 +106,7 @@ const Home = () => {
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4">
         <div className="flex-shrink-0 mt-0 sm:mt-4 min-w-[260px]">
           <h1 className="text-2xl font-bold mb-4">購読室の予約状況</h1>
-          <p className="mb-4">選択した日付: {date.toLocaleDateString('ja-JP')}</p>
+          <p className="bg-yellow-300 font-bold mb-4">選択した日付: {date.toLocaleDateString('ja-JP')}</p>
           <Calendar value={date} onChange={handleDateChange} locale="ja-JP" />
         </div>
         <div className="flex-grow pl-0 sm:pl-4 mt-4 sm:mt-0">
