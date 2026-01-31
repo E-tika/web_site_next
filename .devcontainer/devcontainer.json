@@ -14,5 +14,13 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
       }
     }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+  "mounts": ["source=claude-config,target=/root/.claude,type=volume"],
+  "containerEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
   }
 }
