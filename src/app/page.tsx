@@ -1,12 +1,15 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Image from 'next-export-optimize-images/image';
 import Modal from 'react-modal';
-
-// Modal.setAppElement('#__next'); // For accessibility, binds the modal to your app root
 
 const HomePage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    Modal.setAppElement('body');
+  }, []);
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -14,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col md:flex-row p-4">
       <div className="flex-1 flex justify-center items-center">
-        <img
+        <Image
           src="/images/classroom_map.png"
           alt="Sample"
           width={500}
@@ -53,7 +56,7 @@ const HomePage = () => {
           <button onClick={closeModal} className="absolute top-2 right-2 text-black">
             ✖
           </button>
-          <img
+          <Image
             src="/images/classroom_map.png"
             alt="Sample"
             width={800}

@@ -17,19 +17,17 @@ let app: FirebaseApp;
 let auth: Auth;
 let firestore: Firestore;
 
-app = initializeApp(firebaseConfig)
+// Only initialize Firebase on the client side
+if (typeof window !== 'undefined') {
+    if (!getApps().length) {
+        app = initializeApp(firebaseConfig);
+    } else {
+        app = getApps()[0];
+    }
+    auth = getAuth(app);
+    firestore = getFirestore(app);
+}
 
-// // Initialize Firebase only if no Firebase app is already initialized
-// if (!getApps().length) {
-//     app = initializeApp(firebaseConfig);
-// } else {
-//     app = getApps()[0];
-// }
-
-
-auth = getAuth(app);
-firestore = getFirestore(app);
-
-const provider = new GoogleAuthProvider()
+const provider = new GoogleAuthProvider();
 
 export { auth, firestore, provider };

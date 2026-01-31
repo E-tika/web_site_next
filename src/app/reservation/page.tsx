@@ -23,8 +23,11 @@ const Home = () => {
       try {
         const data = await fetchReservations();
         setReservations(data);
+        setError(null);
       } catch (err) {
-        setError('データの取得に失敗しました');
+        const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
+        setError(errorMessage);
+        console.error('Reservation fetch error:', err);
       } finally {
         setLoading(false);
       }
@@ -121,8 +124,18 @@ const Home = () => {
               {renderTimeSlots()}
             </div>
           </div>
-          {loading && <p>データを読み込み中...</p>}
-          {error && <p className="text-red-500">{error}</p>}
+          {loading && <p className="text-blue-500">データを読み込み中...</p>}
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+              <p className="font-bold">エラー</p>
+              <p>{error}</p>
+              {error.includes('設定されていません') && (
+                <p className="text-sm mt-2">
+                  管理者に連絡して環境変数の設定を確認してください。
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
