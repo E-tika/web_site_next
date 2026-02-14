@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { firestore, auth } from "@/libs/firebaseConfig"
 import { collection, doc, setDoc, getDocs, writeBatch } from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
@@ -68,11 +68,28 @@ const AdminPageContent: React.FC = () => {
         const reader = new FileReader();
         reader.onload = async (e) => {
             try {
-                const data = new Uint8Array(e.target?.result as ArrayBuffer);
-                const workbook = XLSX.read(data, { type: "array" });
-                const sheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[sheetName];
-                const jsonData: { 学生番号: string }[] = XLSX.utils.sheet_to_json(worksheet);
+                const buffer = e.target?.result as ArrayBuffer;
+                const workbook = new ExcelJS.Workbook();
+                await workbook.xlsx.load(buffer);
+                const worksheet = workbook.worksheets[0];
+
+                // ヘッダー行からカラム名を取得し、「学生番号」列のインデックスを特定
+                const headerRow = worksheet.getRow(1);
+                let studentNumCol = -1;
+                headerRow.eachCell((cell, colNumber) => {
+                    if (String(cell.value).trim() === '学生番号') {
+                        studentNumCol = colNumber;
+                    }
+                });
+
+                const jsonData: { 学生番号: string }[] = [];
+                worksheet.eachRow((row, rowNumber) => {
+                    if (rowNumber === 1) return; // ヘッダーをスキップ
+                    const value = studentNumCol !== -1 ? row.getCell(studentNumCol).value : null;
+                    if (value) {
+                        jsonData.push({ 学生番号: String(value) });
+                    }
+                });
 
                 console.log(jsonData);  // デバッグ用ログ
 
