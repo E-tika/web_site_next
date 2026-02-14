@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export && next-export-optimize-images"
+    "export": "next build && next-export-optimize-images"
   },
   "dependencies": {
     "@mui/material": "^5.15.20",
