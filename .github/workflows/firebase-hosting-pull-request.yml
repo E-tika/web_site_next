@@ -29,3 +29,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_E_DOUKOUKAI_NEXT }}
           projectId: e-doukoukai-next
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
