@@ -5,8 +5,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export const metadata: Metadata = {
-  title: '経済学部同好会',
+  title: {
+    default: '京都大学経済学部同好会',
+    template: '%s | 京都大学経済学部同好会',
+  },
   description: '京都大学経済学部同好会のホームページです',
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: '/favicons/favicon.ico' },
