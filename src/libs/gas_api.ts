@@ -1,13 +1,26 @@
 import axios from 'axios';
 
-const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL!;
-const API_KEY = process.env.NEXT_PUBLIC_GAS_KEY;
-
 export const fetchReservations = async () => {
-    const response = await axios.get(GAS_URL, {
-        params: {
-            apiKey: API_KEY
+    try {
+        const response = await axios.get('/api/reservations', {
+            timeout: 10000,
+        });
+
+        if (!response.data || !Array.isArray(response.data)) {
+            throw new Error('GAS APIからのレスポンス形式が不正です');
         }
-    });
-    return response.data;
+
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.code === 'ECONNABORTED') {
+                throw new Error('GAS APIへの接続がタイムアウトしました');
+            }
+            if (error.response?.data?.error) {
+                throw new Error(error.response.data.error);
+            }
+        }
+        console.error('GAS API error:', error);
+        throw error;
+    }
 };

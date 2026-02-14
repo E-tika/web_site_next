@@ -23,8 +23,11 @@ const Home = () => {
       try {
         const data = await fetchReservations();
         setReservations(data);
+        setError(null);
       } catch (err) {
-        setError('データの取得に失敗しました');
+        const errorMessage = err instanceof Error ? err.message : 'データの取得に失敗しました';
+        setError(errorMessage);
+        console.error('Reservation fetch error:', err);
       } finally {
         setLoading(false);
       }
@@ -34,10 +37,13 @@ const Home = () => {
   }, []);
 
   const formatDate = (dateStr: string) => {
+    // GASの日付はJST日付がUTC 15:00として格納されているため、
+    // JSTに変換（+9時間）して日付部分を取得する
     const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const jst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+    const year = jst.getUTCFullYear();
+    const month = String(jst.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(jst.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
 
@@ -71,8 +77,9 @@ const Home = () => {
         <div className="w-24 border p-2">{timeSlot}</div>
         {rooms.map((room) => {
           const roomReservations = getRoomReservations(room, date);
+          const slotMinutes = timeToMinutes(timeSlot.replace('~', ''));
           const isReserved = roomReservations.some(
-            res => { return timeToMinutes(timeSlot) >= timeToMinutes(res.startTime) && timeToMinutes(timeSlot) < timeToMinutes(res.endTime) }
+            res => slotMinutes >= timeToMinutes(res.startTime) && slotMinutes < timeToMinutes(res.endTime)
           );
 
           return (
@@ -121,8 +128,18 @@ const Home = () => {
               {renderTimeSlots()}
             </div>
           </div>
-          {loading && <p>データを読み込み中...</p>}
-          {error && <p className="text-red-500">{error}</p>}
+          {loading && <p className="text-blue-500">データを読み込み中...</p>}
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+              <p className="font-bold">エラー</p>
+              <p>{error}</p>
+              {error.includes('設定されていません') && (
+                <p className="text-sm mt-2">
+                  管理者に連絡して環境変数の設定を確認してください。
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
