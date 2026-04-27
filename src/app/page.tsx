@@ -41,8 +41,7 @@ const HomePage = () => {
         </p>
         <h2 className="text-xl mt-4 mb-2 font-extrabold text-red-500">
                         当サイトは2026年5月11日(月)をもって機能を停止いたします．<br />
-                        5月11日以降の購読室の予約は新サイト(5月初旬に公開予定)にて行ってください．<br />
-                        なお、新サイトは5月初旬頃の公開を予定しております。<br />
+                        5月11日以降の購読室の予約は新サイト(https://e-tika.github.io/E-tika_web/index.html)にて行ってください．<br />
                         (5月10日までは，当サイトにて予約を承っております．)<br /><br />
                         </h2>
         <h2 className="text-xl mt-4 mb-2 font-extrabold text-red-500">！人員募集中！</h2>
