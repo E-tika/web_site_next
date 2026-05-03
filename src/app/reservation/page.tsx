@@ -108,6 +108,7 @@ const Home = () => {
             <span className='ml-4'>重複予約については、先の予約を優先させていただきます</span>
           </li>
           <li>土・日・祝は購読室はご利用いただけません。予約なさらないようご注意ください。</li>
+          <li><strong>！！！5月11日(月)以降の購読室の利用予約は、新サイトで行ってください！！！</strong></li>
         </ul>
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4">
